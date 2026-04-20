@@ -1,0 +1,32 @@
+{{ define "main" }}
+<div class="posts">
+    <h1>{{ .Title }}</h1>
+    
+    <div class="directory-container" style="font-family: monospace; padding: 20px;">
+        <div style="color: #88c0d0; margin-bottom: 15px;">$ ls -F {{ .RelPermalink }}</div>
+        
+        <ul style="list-style: none; padding-left: 0;">
+            {{ range .Sections }}
+            <li style="margin-bottom: 8px;">
+                <span style="color: #ebcb8b;">📁</span> 
+                <a href="{{ .Permalink }}" style="text-decoration: none; color: #88c0d0; font-weight: bold;">
+                    {{ .Title }}/
+                </a>
+            </li>
+            {{ end }}
+
+            {{ range .RegularPages }}
+            <li style="margin-bottom: 8px;">
+                <span style="color: #a3be8c;">📄</span> 
+                <a href="{{ .Permalink }}" style="text-decoration: none; color: #d8dee9;">
+                    {{ .Title | default .File.BaseFileName }}
+                </a>
+                <span style="color: #616e87; font-size: 0.8rem; margin-left: 15px;">
+                    {{ if not .Date.IsZero }}{{ .Date.Format "2006-01-02" }}{{ end }}
+                </span>
+            </li>
+            {{ end }}
+        </ul>
+    </div>
+</div>
+{{ end }}

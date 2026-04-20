@@ -109,3 +109,7 @@ pagination.pagerSize = 5
           identifier = "Posts"
           name = "Posts"
           url = "/posts"
+        [[languages.en.menu.main]]
+          identifier = "Random Notes"
+          name = "Random Notes"
+          url = "/Notes"

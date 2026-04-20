@@ -7,7 +7,7 @@ draft: false
 
 ## whoami
 
-I am Garrett a security researcher with a heavy focus on RE, Malware Development, Cybersecurity engineering, and DFIR. 
+I'm Garrett, a security researcher, with a heavy focus on RE, Malware Development, Cybersecurity engineering, and DFIR. 
 
 This year I will be competing in the NSA CBC and I hope to beat every single challenge Follow me on my journey!
 
