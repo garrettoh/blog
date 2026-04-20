@@ -1,4 +1,4 @@
 ---
-title: "Notes Directory"
+title: "Notes Dir"
 layout: "notes"
 ---
