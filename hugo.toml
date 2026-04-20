@@ -10,8 +10,7 @@ pagination.pagerSize = 5
   noClasses = false
 
 [params]
-
-  theme = "blue"  # so this is supposed to do something ... it doesn't just refer to $ROOT/static/style.css
+  customCSS = ["style.css", "syntax.css"]
   # dir name of your main content (default is `content/posts`).
   # the list of set content will show up on your index page (baseurl).
   contentTypeName = "posts"

