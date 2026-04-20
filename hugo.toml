@@ -10,12 +10,14 @@ pagination.pagerSize = 5
   noClasses = false
 
 [params]
+
+  theme = "blue"  # so this is supposed to do something ... it doesn't just refer to $ROOT/static/style.css
   # dir name of your main content (default is `content/posts`).
   # the list of set content will show up on your index page (baseurl).
   contentTypeName = "posts"
 
   # if you set this to 0, only submenu trigger will be visible
-  showMenuItems = 2
+  showMenuItems = 4
 
   # show selector to switch language
   showLanguageSelector = false
@@ -74,12 +76,12 @@ pagination.pagerSize = 5
 [languages]
   [languages.en]
     languageName = "English"
-    title = "Terminal"
+    title = "Garrettoh's Research / Blog"
 
     [languages.en.params]
-      subtitle = "A simple, retro theme for Hugo"
-      owner = ""
-      keywords = ""
+      subtitle = "garrettoh security blog"
+      owner = "garrettoh"
+      keywords = "Reverse Engineering, Cybersecurity"
       copyright = ""
       menuMore = "Show more"
       readMore = "Read more"
@@ -92,7 +94,7 @@ pagination.pagerSize = 5
       words = "words"
 
       [languages.en.params.logo]
-        logoText = "Terminal"
+        logoText = "Home"
         logoHomeLink = "/"
 
       [languages.en.menu]
@@ -104,3 +106,7 @@ pagination.pagerSize = 5
           identifier = "showcase"
           name = "Showcase"
           url = "/showcase"
+        [[languages.en.menu.main]]
+          identifier = "Posts"
+          name = "Posts"
+          url = "/posts"

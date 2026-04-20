@@ -1,0 +1,18 @@
+:root {
+  /* Nord Theme Overrides */
+  --background: #2E3440 !important;
+  --foreground: #D8DEE9 !important;
+  --accent: #88C0D0 !important;
+}
+
+/* This ensures the body and main container use the Nord background */
+body, .container {
+  background-color: var(--background) !important;
+  color: var(--foreground) !important;
+}
+
+/* Fixes the borders and buttons to match the accent */
+.menu a:hover, .post-title, .button {
+  color: var(--accent) !important;
+  border-color: var(--accent) !important;
+}
