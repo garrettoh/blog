@@ -16,3 +16,11 @@ body, .container {
   color: var(--accent) !important;
   border-color: var(--accent) !important;
 }
+
+/* Ensure code blocks keep their specific syntax background */
+.chroma {
+    background-color: #2e3440 !important;
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+}
