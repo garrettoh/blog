@@ -6,7 +6,7 @@ draft: false
 
 # /notes/500-hacking/adcs_relay
 
-![ADCS Overview](/images/adcs/ADCSv.png)
+![ADCS Overview](/images/ADCS/ADCSv.png)
 
 ## Certificate Templates
 Templates are critical; they define the certificate's purpose. Common use cases include:
@@ -14,7 +14,7 @@ Templates are critical; they define the certificate's purpose. Common use cases 
 * **Email Encryption**
 * **Code Signing**
 
-![Certificate Template Info](/images/adcs/Cert%20Info.png)
+![Certificate Template Info](/images/ADCS/Cert%20Info.png)
 
 ## Net-NTLM Relay to ADCS HTTP Endpoints
 The Certificate Enrollment web interface is typically hosted at: `http://<ADCS-SERVER>/certsrv/`
@@ -30,7 +30,7 @@ Many forced auth coercion techniques utilize RPC calls to trigger authentication
 * Send an `EfsRpcOpenFileRaw` request, directing it to your attacker machine.
 * This tricks the DC into initiating a Net-NTLM handshake with your machine to "authenticate" before opening the file.
 
-![Net-NTLM Relay Diagram](/images/adcs/NetNTLM%20Relay.png)
+![Net-NTLM Relay Diagram](/images/ADCS/NetNTLM%20Relay.png)
 
 ---
 
