@@ -1,6 +1,6 @@
 ---
 title: "Building an IR Lab with Atomic Red Team: Moving Beyond TryHackMe"
-date: 2026-04-20
+date: 2026-04-24
 author: garrettoh
 categories:
   - Security
