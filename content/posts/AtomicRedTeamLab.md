@@ -1,6 +1,6 @@
 ---
 title: "Building an IR Lab with Atomic Red Team: Moving Beyond TryHackMe"
-date: 2026-04-24
+date: 2026-04-20
 author: garrettoh
 categories:
   - Security
@@ -232,7 +232,7 @@ We can use autoruns to utilize platforms such as `virustotal.com` which is a hug
 
 I'm glad I did something like this with a non-security focused team such as the helpdesk as I believe bridging the gap between all departments with security is a great first step at a better security posture. 
 
-My team is now trained to get rid of some basic malware and I can nerd out to them a little bit more now :)....
+My team is now trained to get rid of some basic malware and I can nerd out to them a little bit more now :)...
 
 I'm going to keep all of my files in the Random Notes tab on the website under (Project Files) in the home directory.
 
