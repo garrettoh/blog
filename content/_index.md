@@ -20,7 +20,7 @@ single: true
   </div>
 
   <div class="terminal-card">
-    <span class="card-number">[02] CTFs / Competetions</span>
+    <span class="card-number">[02] CTFs / Competitions</span>
     <p><strong>FlareOn CTF</strong> Solved all challenges placing ~Top 100 in the World.</p>
     <p><strong>TryHackMe</strong> Top 1% of Users</p>
     <p><strong>HackTheBox</strong> CTF Player</p>
