@@ -1,51 +1,39 @@
 ---
-title: ""
+title: "Showcase"
+date: 2026-04-20
 layout: "single"
-single: true 
+showFullContent: true
+readingTime: false
 ---
 
-# guest@garrettoh:~$ whoami --resume
+# /var/log/showcase
 
-<div class="resume-grid">
+## Reverse Engineering & Malware Analysis
+* **Flare-On 13 Challenge Finisher**
+    * Completed 100% of the Flare-On 13 challenges, covering binary deobfuscation, custom packing schemes, and kernel-mode rootkit analysis.
+    * Developed custom tooling for deobfuscation purposes
+* **Specialized Malware Triage**
+    * 3 years of experience in binary exploitation and static/dynamic analysis.
+    * Expert-level proficiency with IDA Pro, Ghidra, x64dbg, and various debugger/disassembler toolchains.
 
-  <div class="terminal-card">
-    <span class="card-number">[01] Education</span>
-    <p><strong>B.S. Cybersecurity & Information Assurance</strong></p>
-    <p><strong>A.S. Computer Information Systems</strong></p>
-  </div>
+## Professional Certifications
+### Active Credentials
+* **CompTIA CySA+** (Cybersecurity Analyst)
+* **AWS Certified Solutions Architect**
+* **Cisco CCNA** 
+* **CompTIA Security+**
+* **Linux Essentials**
+* **CompTIA A+**
 
-  <div class="terminal-card">
-    <span class="card-number">[02] CTFs / Competetions</span>
-    <p><strong>FlareOn CTF</strong> Solved all challenges placing ~Top 100 in the World.</p>
-    <p><strong>TryHackMe</strong> Top 1% of Users</p>
-    <p><strong>HackTheBox</strong> CTF Player</p>
-    <p><strong>NSA CBC (Upcoming Candidate)</strong> CTF Player</p>
-  </div>
+### Current Objectives (Target 2026)
+* **OSCP** (Offensive Security Certified Professional) -- Planned for July 2026
+* **CISSP** (Certified Information Systems Security Professional) -- Planned for October 2026
+* **BSCSIA** (Bachelors of Science in Cybersecurity and Information Assurance @ WGU) -- Planned Graduation August 2026
 
-  <div class="terminal-card">
-    <span class="card-number">[03] Professional Impact</span>
-    <p><strong>Lead Security Engineer</strong></p>
-    <p>Served as sole PoC for SecOps and IR, investigating alerts and leveraging RE to neutralize active C2 threats.</p>
-    <p>Architected comprehensive security stacks (SIEM, EDR, IAM) and automated baseline network hardening. </p>
-  </div>
-
-  <div class="terminal-card">
-    <span class="card-number">[04] CNO & Engineering</span>
-    <p><strong>Malware Dev & Evasion:</strong> Engineered custom virtualization layers and implemented ETW patching using C and Assembly.</p>
-    <p><strong>DFIR Automation:</strong> Developed automated forensic triaging scripts, reducing incident response time by 40%.</p>
-    <p><strong>Threat Hunting:</strong> Built custom YARA signatures to uncover zero-day covert C2 communication tunnels.</p>
-  </div>
-
-</div>
+## Technical Proficiencies
+* **Languages:** C, C++, Assembly (x86/x64), Python, Rust.
+* **Operations:** Advanced Linux/Windows administration, incident response automation, and threat hunting.
+* **Infrastructure:** Architecting secure cloud environments via AWS.
 
 ---
-
-### guest@garrettoh:~$ ls ./recent-research/
-{{< latest-posts >}}
-
-### guest@garrettoh:~$ systemctl status tools.service
-**Core Languages:** Python, C, C++, Assembly, Bash, PowerShell.
-
-**Engineering Focus:** Reverse Engineering, Malware Development, DFIR, Threat Emulation. 
-
-**Tooling Expertise:** Ghidra/IDA, x64Dbg, YARA, SIEM, EDR/XDR, KAPE.
+> "The spoon remembers what the fork forgot." -Sun Tzu
