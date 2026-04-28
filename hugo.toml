@@ -8,7 +8,6 @@ pagination.pagerSize = 5
 # Required for Chroma and the custom syntax highlighting.
 [markup.highlight]
   noClasses = false
-
 [params]
   customCSS = ["style.css", "syntax.css"]
   # dir name of your main content (default is `content/posts`).
@@ -113,3 +112,11 @@ pagination.pagerSize = 5
           identifier = "Random Notes"
           name = "Random Notes"
           url = "/Notes"
+
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+

@@ -24,3 +24,49 @@ body, .container {
     border-radius: 4px;
     overflow-x: auto;
 }
+/* The Dashboard Grid */
+.resume-grid {
+  display: grid;
+  /* Reduced min-width slightly to ensure 4 cards fit better on smaller screens */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px; /* Tighter gap */
+  margin: 1rem 0; /* Reduced outer margin */
+  width: 100%;
+}
+
+/* The Nord Cards */
+.terminal-card {
+  border: 1px solid #4C566A !important;
+  padding: 0.8rem; /* Shrunk padding for a tighter fit */
+  border-radius: 4px;
+  background-color: #3B4252 !important;
+  color: var(--foreground) !important;
+  font-size: 0.85rem; /* Smaller base text size */
+}
+
+/* Tighter spacing for paragraphs inside cards */
+.terminal-card p {
+  margin: 0 0 0.4rem 0; /* Minimal bottom margin */
+  line-height: 1.2; /* Tighter line height */
+}
+
+.card-number {
+  color: var(--accent) !important;
+  font-weight: bold;
+  font-family: 'Fira Code', monospace;
+  display: block;
+  margin-bottom: 0.5rem; /* Reduced from 0.75rem */
+  border-bottom: 1px solid #4C566A;
+  padding-bottom: 3px; /* Reduced from 5px */
+  font-size: 0.8rem; /* Slightly smaller header */
+}
+
+/* Ensure strong tags inside cards match the Nord look */
+.terminal-card strong {
+  color: var(--accent) !important;
+}
+
+/* Remove margin from last paragraph to avoid extra space at bottom */
+.terminal-card p:last-child {
+  margin-bottom: 0;
+}

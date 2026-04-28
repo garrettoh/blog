@@ -1,0 +1,7 @@
+<ul>
+  {{ range first 5 (where .Site.RegularPages "Section" "posts") }}
+    <li>
+      <a href="{{ .Permalink }}" style="color: var(--accent);">{{ .Date.Format "2006-01-02" }}</a> - {{ .Title }}
+    </li>
+  {{ end }}
+</ul>
