@@ -1,3 +1,9 @@
+---
+title: ""
+layout: "single"
+single: true 
+---
+
 # guest@garrettoh:~$ whoami --resume
 
 <div class="resume-grid">
