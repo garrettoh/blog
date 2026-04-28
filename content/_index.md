@@ -9,9 +9,14 @@ single: true
 <div class="resume-grid">
 
   <div class="terminal-card">
-    <span class="card-number">[01] Education</span>
-    <p><strong>B.S. Cybersecurity & Information Assurance</strong></p>
-    <p><strong>A.S. Computer Information Systems</strong></p>
+    <span class="card-number">[01] Education & Certs</span>
+    <p><strong>B.S. Cybersecurity & Information Assurance</strong> - In Progress</p>
+    <p><strong>OSCP</strong> - In Progress</p>
+    <p><strong>CISSP</strong> - In Progress</p>
+    <p><strong>CySA+</strong> April 2026</p>
+    <p><strong>CCNA</strong> March 2025</p>
+    <p><strong>AWS Solutions Architect</strong> April 2025</p>
+    <p><strong>Security+</strong> June 2024</p>
   </div>
 
   <div class="terminal-card">
