@@ -1,6 +1,6 @@
 ---
 title: "Mesh Agent: A story of the random open-source RMM tool"
-date: 2026-05-07
+date: 2026-05-06
 author: garrettoh
 categories:
   - Security
