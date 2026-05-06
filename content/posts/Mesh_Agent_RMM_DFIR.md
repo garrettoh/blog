@@ -1,6 +1,6 @@
 ---
 title: "Mesh Agent: A story of the random open-source RMM tool"
-date: 2026-05-06
+date: 2026-05-07
 author: garrettoh
 categories:
   - Security
@@ -11,35 +11,51 @@ tags:
   - Incident Report
 ---
 
- Threat Analysis: MeshAgent Sleeper Deployment and Attempted BDE Key Exfiltration
+# Threat Analysis: MeshAgent Sleeper RMM and Attempted BDE Key Exfiltration
 
-## Executive Summary
-This post details a multi-staged intrusion originating from a compromised user account, leading to the deployment of a "sleeper" MeshAgent payload across an RDS environment. The threat actor maintained persistence for over two months, conducting network reconnaissance and lateral movement before attempting to exfiltrate BitLocker (BDE) recovery keys. The final exfiltration phase over an encrypted C2 channel was successfully intercepted and blocked by SentinelOne EDR.
+## Initial Information
+I wanted to start this off by saying I had never heard of mesh agent previously up until this point. Essentially it is an Open Source RMM tool with a 2010 style UI. It allows for capabilities that many other RMM tools offer which can be used for legitmate purposes aswell as malicious ones. 
+
+This post we're going to go into the attack lifecycle of the attack some lessons learned and key points regarding the initial compromise.
 
 ### Diagram of Attack
 ![](/images/mesh_agent/rmm_diagram.png)
 ## Attack Timeline & Execution Flow
 
-### 1. Initial Access (2025-12-03)
-The intrusion began on December 3, 2025, with the compromise of the account `User\FOSG`. This compromise provided the threat actor with access to the environment's RDS pool (spanning RDS 1 through 4). 
+---
+
+### 1. Initial Access
+The initial compromise was a standard domain user whose password was compromised. This connection was created over the remote appliance, and then from there an initial foothold was on the RDS under that users account.
+
 
 ### 2. First-Stage Persistence & C2
-Initial persistence was established via a Mesh Agent installation on `frsno-rds-02`. An associated payload named `nfc zip` was identified during this phase. 
+After initial compromise they installed the `Mesh Agent` RMM software with their configuration to the `Program Files` Directory. This was installed on all RDS servers in the same directory.
 * **Initial C2 IP:** `104.238.129.233`
 * **Initial C2 Domain:** `hxxps://vultrusercontent[.]com:http`
 * **Uninstall String Identified:** `C:\Program Files\Mesh Agent\MeshAgent.exe -funinstall --meshServiceName="Mesh Agent"`
 
-### 3. Sleeper Deployment & Lateral Movement (2026-02-16)
-On February 16, 2026, the threat actor installed a new Mesh Agent payload on `FRSNO-ADMIN28`. This agent remained dormant on the device for 2 months and 2 weeks, during which it mapped out the network and prepared for data exfiltration. 
-
+### 3. Sleeper Deployment & Lateral Movement 
+From this point the threat actor laterally moved to a front desk PC whilst slowly mapping out the network.
 ### 4. Infrastructure Update & Execution
-Following the dormancy period, the attacker queried the RDS pool (1-4) for existing Mesh Agents. Where found, they replaced the existing legitimate `MSTCS` binary in the `System32` directory with a renamed Mesh Agent binary, `mvtcs.exe` (flagged with 32 detections). This action updated the configuration to point to a new, active C2 infrastructure on `FRSNO-RDS-02`: `wss[://]45.13.212[.]7:443`. The attacker then queried active local sessions for user enumeration. To escalate privileges and execute commands, the attacker utilized the following lateral movement command from the RDS to the Built-in Admin of the `FRSNO-ADMIN28` user:
-`mvtcs.exe --connectByUser='S-1-5-21-2909088412-1195962-2846074886-1000'`
+Following the dormancy/slow network mapping period after 2 months which would now be `April 16th 2026`, They added a file in all of the System32 Directories of the RDS Pool and updated the .msh configuration file to point to a new seemingly more active IP `wss://45.13.212[.]7:443`. The attacker queried sessions for local user enumeration and utilized the new binary in the System32 directory to establish a high-privilige session via the new binary. 
 
 ### 5. Attempted Exfiltration & EDR Mitigation
-Operating with administrative context on `FRSNO-ADMIN28`, the attacker executed the following command to extract BitLocker recovery keys:
-`Manage-bde.exe -protectors -get C:`
-The objective was to stage the BDE keys and exfiltrate them over the encrypted C2 channel (Mesh IV AES). SentinelOne EDR successfully detected and blocked this exfiltration attempt.
+Following the upgrade to a higher privilege level the attacker attempted to extract the BitLocker recovery keys and query more domain information
+```powershell
+Manage-bde.exe -protectors -get C:
+
+Get-Content (Get-PSReadLineOption).HistorySavePath
+
+Get-ChildItem -Path C:\ -Include *.xml,*.config,*.txt,*.ini 
+-Recurse -ErrorAction SilentlyContinue | Select-String -Pattern "password"
+
+$searcher = [adsisearcher]"(objectCategory=computer)"; 
+$searcher.Filter = "(&(objectClass=computer)(|(name=*SQL*)(name=*DC*)))"; 
+$searcher.FindAll() | ForEach-Object { $_.Properties.dnshostname }
+```
+The attackers objective was to encrypt the contents and extract the information over a TLS and AES IV encrypted tunnel with the new C2 Infrastructure.
+
+To me it looks like more AI slop, what a sad time to be alive.
 
 ## Indicators of Compromise (IOCs)
 
@@ -49,14 +65,25 @@ The objective was to stage the BDE keys and exfiltrate them over the encrypted C
 * `wss[://]45.13.212[.]7:443`
 
 ### File System IOCs
-* `C:\Windows\System32\mvtcs.exe` (Renamed Mesh Agent, replaced old MSTCS)
+* `C:\Windows\System32\mvtcs.exe` (Renamed Mesh Agent)
 * `C:\Program Files\Mesh Agent\MeshAgent.exe`
 
-### SHA256 Hashes (Identified on fresno-rds02 in C:\Program Files\Mesh Agent\)
+### SHA256 Hashes
 * `893D9B52CCA57395C11C3363D350690767E2F1CF04A01A4600A76C08624AA165`
 * `EB1853BF7ADD4D6D053A3BAFCB0D8C2DB4B9C3F71070D0BA32069D99CAA8CECE`
 * `044229E938B70AD2BB8403521CFD3B15D4EC518BCA6EC68A6C0CEC963DECD7CD`
 * `B7F4CBC43E55774C475AACCA133818C37552ED0923DAC1566241C7CC7DC8F3BB`
 
-### VirusTotal Results
+### Reference Analysis
 `https://www.virustotal.com/gui/file/7e325b6769dcb900f88161e52ba61b18f9f39127f08551638bd652fa2a267833/community`
+
+---
+
+### Personal notes/Information to reach me
+
+P.S if anyone has any really cool samples keep them in your vault, I'm going to setup a communication tunnel on the website rather than just a static blog hugo site. 
+
+So far I'm loving it though
+
+If you want a social for now you can reach out to garrettoh on discord :)
+
