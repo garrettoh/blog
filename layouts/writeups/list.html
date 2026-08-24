@@ -1,0 +1,97 @@
+{{ define "main" }}
+{{ $displayPage := . }}
+{{ if eq .RelPermalink "/writeups/" }}
+  {{ $displayPage = site.GetPage "/writeups/flareon-12/01-drill-baby-drill/" }}
+{{ end }}
+{{ $flareon := site.GetPage "/writeups/flareon-12/" }}
+{{ $cbc := site.GetPage "/writeups/nsa-cbc-25/" }}
+
+<aside class="writeup-sidebar" aria-label="Writeup navigation">
+    <button class="writeup-sidebar-toggle" type="button" aria-controls="writeup-sidebar-panel" aria-expanded="true" aria-label="Collapse navigation">
+      <span class="writeup-sidebar-toggle-label">Collapse</span><span aria-hidden="true">‹</span>
+    </button>
+    <div class="writeup-sidebar-panel" id="writeup-sidebar-panel">
+      <a class="writeup-home-link" href="/">← Back to homepage</a>
+      <a class="writeup-root-link" href="/writeups/">WRITEUPS</a>
+
+      <nav class="writeup-tree">
+        <div class="writeup-tree-group">
+          <a class="writeup-tree-heading" href="{{ $flareon.RelPermalink }}">📁 FLARE-On 12 <span>WIP</span></a>
+          <ul>
+            {{ range $flareon.Sections.ByTitle }}
+            <li><a href="{{ .RelPermalink }}" class="{{ if eq .RelPermalink $displayPage.RelPermalink }}is-active{{ end }}">{{ .Title }}</a></li>
+            {{ end }}
+          </ul>
+        </div>
+
+        <div class="writeup-tree-group">
+          <a class="writeup-tree-heading" href="{{ $cbc.RelPermalink }}">📁 NSA CBC 2025 <span>WIP</span></a>
+          <ul>
+            {{ range $cbc.Sections.ByTitle }}
+            <li><a href="{{ .RelPermalink }}" class="{{ if eq .RelPermalink $displayPage.RelPermalink }}is-active{{ end }}">{{ .Title }}</a></li>
+            {{ end }}
+          </ul>
+        </div>
+      </nav>
+    </div>
+ </aside>
+
+<main class="writeup-workspace">
+  <article class="writeup-reader">
+    <header class="writeup-reader-header">
+      <p class="writeup-breadcrumb">WRITEUPS / {{ with $displayPage.Parent }}{{ .Title }} / {{ end }}</p>
+      <div class="writeup-reader-title-row">
+        <h1>{{ $displayPage.Title }}</h1>
+        <span class="writeup-status">{{ $displayPage.Params.status | default "WIP" }}</span>
+      </div>
+      {{ with $displayPage.Params.overview }}<p class="writeup-reader-overview">{{ . }}</p>{{ end }}
+      {{ with $displayPage.Parent.Params.eta }}<p class="writeup-reader-eta">Archive target: <strong>{{ . }}</strong></p>{{ end }}
+    </header>
+
+    <div class="writeup-reader-content">
+      {{ $displayPage.Content }}
+    </div>
+  </article>
+</main>
+<style>
+  :root { --writeup-sidebar-width: 260px; --writeup-reader-left: 300px; --writeup-reader-center-offset: 150px; --writeup-reader-max-width: 1100px; --writeup-reader-font-size: 1.08rem; }
+  html.writeup-sidebar-collapsed { --writeup-sidebar-width: 58px; --writeup-reader-left: 90px; --writeup-reader-center-offset: 45px; --writeup-reader-max-width: 1300px; --writeup-reader-font-size: 1.16rem; }
+  .writeup-sidebar { box-sizing: border-box; height: 100vh; transition: width 180ms ease; }
+  .writeup-sidebar-panel { box-sizing: border-box; display: flex; flex-direction: column; height: 100%; justify-content: center; overflow-y: auto; padding: 1rem 0; transition: opacity 120ms ease, visibility 120ms ease; }
+  .writeup-sidebar-toggle { align-items: center; background: #434C5E; border: 1px solid #4C566A; color: #88C0D0; cursor: pointer; display: flex; font-family: 'Fira Code', monospace; font-size: .72rem; gap: .4rem; padding: .38rem .5rem; position: absolute; right: .55rem; top: .55rem; z-index: 2; }
+  .writeup-sidebar-toggle:hover, .writeup-sidebar-toggle:focus-visible { border-color: #88C0D0; outline: none; }
+  html.writeup-sidebar-collapsed .writeup-sidebar-panel { opacity: 0; pointer-events: none; visibility: hidden; }
+  html.writeup-sidebar-collapsed .writeup-sidebar-toggle { left: 50%; padding: .45rem; right: auto; transform: translateX(-50%); }
+  html.writeup-sidebar-collapsed .writeup-sidebar-toggle-label { display: none; }
+  @media (min-width: 761px) {
+    .writeup-sidebar { width: var(--writeup-sidebar-width); }
+    .writeup-workspace { left: calc(50% + var(--writeup-reader-center-offset)); margin: 2.5rem 0 3rem; position: relative; transform: translateX(-50%); transition: left 180ms ease, transform 180ms ease, width 180ms ease; width: min(var(--writeup-reader-max-width), calc(100vw - var(--writeup-reader-left) - 40px)); }
+    .writeup-reader-content { font-size: var(--writeup-reader-font-size); max-width: 100%; transition: font-size 180ms ease; }
+  }
+  @media (max-width: 760px) {
+    .writeup-sidebar { height: auto; }
+    .writeup-sidebar-panel { display: block; height: auto; padding: 0; }
+    .writeup-sidebar-toggle { display: none; }
+    .writeup-workspace { left: auto; transform: none; }
+  }
+</style>
+<script>
+  (() => {
+    const sidebar = document.querySelector('.writeup-sidebar');
+    const toggle = document.querySelector('.writeup-sidebar-toggle');
+    if (!sidebar || !toggle) return;
+
+    const setCollapsed = (collapsed) => {
+      document.documentElement.classList.toggle('writeup-sidebar-collapsed', collapsed);
+      toggle.setAttribute('aria-expanded', String(!collapsed));
+      toggle.setAttribute('aria-label', collapsed ? 'Expand navigation' : 'Collapse navigation');
+      toggle.querySelector('.writeup-sidebar-toggle-label').textContent = collapsed ? 'Expand' : 'Collapse';
+      toggle.lastElementChild.textContent = collapsed ? '›' : '‹';
+      try { sessionStorage.setItem('writeup-sidebar-collapsed', String(collapsed)); } catch (_) {}
+    };
+
+    try { setCollapsed(sessionStorage.getItem('writeup-sidebar-collapsed') === 'true'); } catch (_) {}
+    toggle.addEventListener('click', () => setCollapsed(!document.documentElement.classList.contains('writeup-sidebar-collapsed')));
+  })();
+</script>
+{{ end }}

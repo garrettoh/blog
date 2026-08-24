@@ -15,7 +15,7 @@ pagination.pagerSize = 5
   contentTypeName = "posts"
 
   # if you set this to 0, only submenu trigger will be visible
-  showMenuItems = 4
+  showMenuItems = 5
 
   # show selector to switch language
   showLanguageSelector = false
@@ -108,6 +108,10 @@ pagination.pagerSize = 5
           identifier = "Posts"
           name = "Posts"
           url = "/posts"
+        [[languages.en.menu.main]]
+          identifier = "writeups"
+          name = "Writeups"
+          url = "/writeups"
         [[languages.en.menu.main]]
           identifier = "Random Notes"
           name = "Random Notes"

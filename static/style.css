@@ -70,3 +70,366 @@ body, .container {
 .terminal-card p:last-child {
   margin-bottom: 0;
 }
+
+/* Writeup archive */
+.writeup-archive {
+  margin: 2rem 0;
+}
+
+.writeup-hero {
+  border: 1px solid #4C566A;
+  border-left: 4px solid var(--accent);
+  background: #3B4252;
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.writeup-path, .writeup-card-topline, .writeup-section-heading span, .writeup-card-eta {
+  color: #81A1C1;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.8rem;
+}
+
+.writeup-path {
+  margin: 0 0 0.75rem;
+}
+
+.writeup-hero-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.writeup-hero h1, .writeup-section-heading h2, .writeup-card h3 {
+  margin: 0;
+}
+
+.writeup-overview {
+  color: #D8DEE9;
+  line-height: 1.55;
+  margin: 0.5rem 0 0;
+  max-width: 46rem;
+}
+
+.writeup-status {
+  border: 1px solid #A3BE8C;
+  color: #A3BE8C;
+  display: inline-block;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+  padding: 0.2rem 0.45rem;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.writeup-eta {
+  border-top: 1px solid #4C566A;
+  color: #D8DEE9;
+  margin: 1rem 0 0;
+  padding-top: 0.85rem;
+}
+
+.writeup-intro {
+  line-height: 1.6;
+  margin: 1.25rem 0 2rem;
+}
+
+.writeup-section-heading {
+  align-items: baseline;
+  border-bottom: 1px solid #4C566A;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding-bottom: 0.7rem;
+}
+
+.writeup-folder-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.writeup-folder-card {
+  background: #3B4252;
+  border: 1px solid #4C566A;
+  display: flex;
+  flex-direction: column;
+  min-height: 145px;
+  overflow: hidden;
+  padding: 1rem;
+  position: relative;
+}
+
+.writeup-folder-card:hover, .writeup-folder-card:focus-within {
+  border-color: var(--accent);
+}
+
+.writeup-folder-topline {
+  align-items: center;
+  color: #81A1C1;
+  display: flex;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.8rem;
+  justify-content: space-between;
+  margin-bottom: 0.65rem;
+}
+
+.writeup-folder-card h3 {
+  margin: 0;
+}
+
+.writeup-folder-link, .writeup-open {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.writeup-folder-link:hover, .writeup-folder-link:focus {
+  text-decoration: underline;
+}
+
+.writeup-folder-preview {
+  background: #434C5E;
+  border-top: 1px solid var(--accent);
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  left: 0;
+  opacity: 0;
+  padding: 1rem;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translateY(105%);
+  transition: opacity 150ms ease, transform 150ms ease;
+  z-index: 1;
+}
+
+.writeup-folder-card:hover .writeup-folder-preview,
+.writeup-folder-card:focus-within .writeup-folder-preview {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.writeup-folder-preview p {
+  color: #D8DEE9;
+  line-height: 1.5;
+  margin: 0 0 0.75rem;
+}
+
+.writeup-card-eta {
+  margin: 0 0 0.65rem !important;
+}
+
+.writeup-open {
+  display: inline-block;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.85rem;
+  margin-top: auto;
+}
+
+@media (max-width: 600px) {
+  .writeup-hero-heading {
+    flex-direction: column;
+  }
+}
+
+/* Writeup reader workspace */
+.writeup-workspace {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 245px minmax(0, 1fr);
+  margin: 2rem 0;
+}
+
+.writeup-sidebar {
+  align-self: start;
+  background: #3B4252;
+  border: 1px solid #4C566A;
+  font-family: 'Fira Code', monospace;
+  position: sticky;
+  top: 1rem;
+}
+
+.writeup-home-link, .writeup-root-link {
+  display: block;
+  text-decoration: none;
+}
+
+.writeup-home-link {
+  border-bottom: 1px solid #4C566A;
+  color: #D8DEE9;
+  font-size: 0.78rem;
+  padding: 0.75rem 0.9rem;
+}
+
+.writeup-home-link:hover {
+  color: var(--accent);
+}
+
+.writeup-root-link {
+  color: var(--accent);
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  padding: 0.9rem;
+}
+
+.writeup-tree {
+  border-top: 1px solid #4C566A;
+  padding: 0.45rem 0;
+}
+
+.writeup-tree-group + .writeup-tree-group {
+  border-top: 1px solid #4C566A;
+  margin-top: 0.45rem;
+  padding-top: 0.45rem;
+}
+
+.writeup-tree-heading {
+  color: #EBCB8B;
+  display: flex;
+  font-size: 0.78rem;
+  justify-content: space-between;
+  padding: 0.55rem 0.9rem;
+  text-decoration: none;
+}
+
+.writeup-tree-heading:hover {
+  color: var(--accent);
+}
+
+.writeup-tree-heading span {
+  color: #A3BE8C;
+  font-size: 0.68rem;
+}
+
+.writeup-tree ul {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0.4rem;
+}
+
+.writeup-tree li a {
+  color: #D8DEE9;
+  display: block;
+  font-size: 0.76rem;
+  line-height: 1.35;
+  padding: 0.3rem 0.9rem 0.3rem 1.55rem;
+  text-decoration: none;
+}
+
+.writeup-tree li a:hover, .writeup-tree li a.is-active {
+  background: #434C5E;
+  color: var(--accent);
+}
+
+.writeup-tree li a.is-active {
+  border-left: 3px solid var(--accent);
+  padding-left: calc(1.55rem - 3px);
+}
+
+.writeup-reader {
+  min-width: 0;
+}
+
+.writeup-reader-header {
+  border-bottom: 1px solid #4C566A;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+}
+
+.writeup-breadcrumb {
+  color: #81A1C1;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.78rem;
+  margin: 0 0 0.6rem;
+}
+
+.writeup-reader-title-row {
+  align-items: flex-start;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.writeup-reader-title-row h1 {
+  margin: 0;
+}
+
+.writeup-reader-overview {
+  color: #D8DEE9;
+  line-height: 1.55;
+  margin: 0.6rem 0 0;
+}
+
+.writeup-reader-eta {
+  color: #A3BE8C;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.82rem;
+  margin: 0.8rem 0 0;
+}
+
+.writeup-reader-content {
+  line-height: 1.65;
+  max-width: 850px;
+}
+
+.writeup-reader-content img {
+  border: 1px solid #4C566A;
+  display: block;
+  height: auto;
+  margin: 1.25rem 0;
+  max-width: 100%;
+}
+
+@media (max-width: 760px) {
+  .writeup-workspace {
+    display: block;
+  }
+
+  .writeup-sidebar {
+    margin-bottom: 1.5rem;
+    position: static;
+  }
+}
+
+@media (min-width: 761px) {
+  .writeup-sidebar {
+    bottom: 0;
+    left: 0;
+    overflow-y: auto;
+    position: fixed;
+    top: 0;
+    width: 260px;
+    z-index: 20;
+  }
+
+  .writeup-workspace {
+    display: block;
+    margin: 2.5rem 0 3rem calc(300px - 50vw + 50%);
+    width: min(1100px, calc(100vw - 350px));
+  }
+
+  .writeup-reader-content {
+    font-size: 1.08rem;
+    max-width: 980px;
+  }
+
+  .writeup-reader-content h2 {
+    font-size: 1.5rem;
+    margin-top: 2.1rem;
+  }
+
+  .writeup-tree li a {
+    font-size: 0.88rem;
+    padding-bottom: 0.42rem;
+    padding-top: 0.42rem;
+  }
+
+  .writeup-tree-heading {
+    font-size: 0.9rem;
+  }
+}
