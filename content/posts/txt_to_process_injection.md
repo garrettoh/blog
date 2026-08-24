@@ -1,7 +1,7 @@
 ---
 title: "Incident Writeup: .NET Process Hollowing Loader"
 date: 2026-08-17
-draft: true
+draft: false
 tags: ["incident-response", "malware-analysis", "reverse-engineering", "process-hollowing", "dotnet", "dfir"]
 categories: ["Security Writeups"]
 severity: "High"
