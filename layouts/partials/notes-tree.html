@@ -1,0 +1,23 @@
+{{- $section := .section -}}
+{{- $current := .current -}}
+<ul class="browse-tree-list notes-tree-list">
+  {{- range $section.Sections.ByTitle }}
+    {{- $isCurrent := eq .RelPermalink $current.RelPermalink -}}
+    {{- $isAncestor := $current.IsDescendant . -}}
+    <li class="browse-tree-folder notes-tree-folder{{ if or $isCurrent $isAncestor }} is-open{{ end }}">
+      <a href="{{ .RelPermalink }}" class="browse-tree-folder-link notes-tree-folder-link{{ if $isCurrent }} is-active{{ end }}">
+        <span aria-hidden="true">📁</span><span>{{ .Title }}</span>
+      </a>
+      {{- if or .Sections .RegularPages }}
+        {{ partial "notes-tree.html" (dict "section" . "current" $current) }}
+      {{- end }}
+    </li>
+  {{- end }}
+  {{- range $section.RegularPages.ByTitle }}
+    <li class="browse-tree-page notes-tree-page">
+      <a href="{{ .RelPermalink }}" class="{{ if eq .RelPermalink $current.RelPermalink }}is-active{{ end }}">
+        <span aria-hidden="true">📄</span><span>{{ .Title | default .File.BaseFileName }}</span>
+      </a>
+    </li>
+  {{- end }}
+</ul>

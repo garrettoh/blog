@@ -71,6 +71,10 @@ pagination.pagerSize = 5
   creator = ""
   site = ""
 
+[params.social]
+  github = "https://github.com/garrettoh"
+  linkedin = "https://www.linkedin.com/in/garrettraeseit"
+
 [languages]
   [languages.en]
     languageName = "English"

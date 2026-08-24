@@ -1,8 +1,20 @@
 {{ define "main" }}
-<article class="post">
-    <h1 class="post-title">{{ .Title | default .File.BaseFileName }}</h1>
-    <div class="post-content">
-        {{ .Content }}
+{{ partial "notes-sidebar.html" . }}
+
+<main class="browse-workspace notes-workspace">
+  <article class="browse-reader notes-reader">
+    <header class="browse-reader-header notes-reader-header">
+      <nav class="browse-breadcrumb notes-breadcrumb" aria-label="Breadcrumb">
+        {{ range .Ancestors.Reverse }}{{ if or (eq .RelPermalink "/notes/") (.IsDescendant (site.GetPage "/notes/")) }}<a href="{{ .RelPermalink }}">{{ .Title }}</a><span>/</span>{{ end }}{{ end }}
+      </nav>
+      <div class="browse-reader-title-row notes-reader-title-row">
+        <h1>{{ .Title | default .File.BaseFileName }}</h1>
+        <span class="browse-badge notes-directory-badge">NOTE</span>
+      </div>
+    </header>
+    <div class="browse-reader-content notes-reader-content">
+      {{ .Content }}
     </div>
-</article>
+  </article>
+</main>
 {{ end }}

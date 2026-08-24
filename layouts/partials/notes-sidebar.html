@@ -1,0 +1,19 @@
+{{- $root := site.GetPage "/notes/" -}}
+<aside class="browse-sidebar notes-sidebar" aria-label="Notes navigation" data-browse-sidebar data-browse-key="notes">
+  <button class="browse-mobile-toggle" type="button" aria-controls="notes-sidebar-panel" aria-expanded="false">
+    <span aria-hidden="true">☰</span> Browse notes
+  </button>
+  <button class="browse-sidebar-collapse" type="button" aria-expanded="true" aria-label="Collapse navigation">
+    <span class="browse-collapse-label">Collapse</span><span class="browse-collapse-arrow" aria-hidden="true">‹</span>
+  </button>
+
+  <div class="browse-sidebar-panel" id="notes-sidebar-panel">
+    <a class="browse-home-link" href="/">← Back to homepage</a>
+    <a class="browse-root-link{{ if eq .RelPermalink $root.RelPermalink }} is-active{{ end }}" href="{{ $root.RelPermalink }}">NOTES</a>
+    <nav class="browse-tree notes-tree" aria-label="All notes">
+      {{ partial "notes-tree.html" (dict "section" $root "current" .) }}
+    </nav>
+  </div>
+</aside>
+
+{{ partial "browse-workspace-script.html" . }}

@@ -1,14 +1,9 @@
 ---
 title: ""
-layout: "single"
 single: true 
 ---
 
 # guest@garrettoh:~$ whoami --resume
-
-### guest@garrettoh:~$ cd ./writeups/
-
-> [Browse the writeups directory →](/writeups/)
 
 <div class="resume-grid">
 

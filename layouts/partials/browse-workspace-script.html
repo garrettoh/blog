@@ -1,0 +1,38 @@
+<script>
+  (() => {
+    const sidebar = document.querySelector('[data-browse-sidebar]');
+    if (!sidebar) return;
+    const root = document.documentElement;
+    const collapseButton = sidebar.querySelector('.browse-sidebar-collapse');
+    const mobileButton = sidebar.querySelector('.browse-mobile-toggle');
+    const storageKey = `${sidebar.dataset.browseKey || 'browse'}-sidebar-collapsed`;
+
+    const setCollapsed = (collapsed) => {
+      root.classList.toggle('browse-sidebar-collapsed', collapsed);
+      if (!collapseButton) return;
+      collapseButton.setAttribute('aria-expanded', String(!collapsed));
+      collapseButton.setAttribute('aria-label', collapsed ? 'Expand navigation' : 'Collapse navigation');
+      const label = collapseButton.querySelector('.browse-collapse-label');
+      if (label) label.textContent = collapsed ? 'Expand' : 'Collapse';
+      const arrow = collapseButton.querySelector('.browse-collapse-arrow');
+      if (arrow) arrow.textContent = collapsed ? '›' : '‹';
+      try { sessionStorage.setItem(storageKey, String(collapsed)); } catch (_) {}
+    };
+
+    try { setCollapsed(sessionStorage.getItem(storageKey) === 'true'); } catch (_) {}
+    collapseButton?.addEventListener('click', () => setCollapsed(!root.classList.contains('browse-sidebar-collapsed')));
+    mobileButton?.addEventListener('click', () => {
+      const open = root.classList.toggle('browse-sidebar-open');
+      mobileButton.setAttribute('aria-expanded', String(open));
+    });
+
+    const desktopQuery = window.matchMedia('(min-width: 761px)');
+    const syncMode = () => {
+      if (!desktopQuery.matches) return;
+      root.classList.remove('browse-sidebar-open');
+      mobileButton?.setAttribute('aria-expanded', 'false');
+    };
+    desktopQuery.addEventListener?.('change', syncMode);
+    syncMode();
+  })();
+</script>

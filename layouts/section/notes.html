@@ -1,32 +1,45 @@
 {{ define "main" }}
-<div class="posts">
-    <h1>{{ .Title }}</h1>
-    
-    <div class="directory-container" style="font-family: monospace; padding: 20px;">
-        <div style="color: #88c0d0; margin-bottom: 15px;">$ ls -F {{ .RelPermalink }}</div>
-        
-        <ul style="list-style: none; padding-left: 0;">
-            {{ range .Sections }}
-            <li style="margin-bottom: 8px;">
-                <span style="color: #ebcb8b;">📁</span> 
-                <a href="{{ .Permalink }}" style="text-decoration: none; color: #88c0d0; font-weight: bold;">
-                    {{ .Title }}/
-                </a>
-            </li>
-            {{ end }}
+{{ partial "notes-sidebar.html" . }}
 
-            {{ range .RegularPages }}
-            <li style="margin-bottom: 8px;">
-                <span style="color: #a3be8c;">📄</span> 
-                <a href="{{ .Permalink }}" style="text-decoration: none; color: #d8dee9;">
-                    {{ .Title | default .File.BaseFileName }}
-                </a>
-                <span style="color: #616e87; font-size: 0.8rem; margin-left: 15px;">
-                    {{ if not .Date.IsZero }}{{ .Date.Format "2006-01-02" }}{{ end }}
-                </span>
-            </li>
-            {{ end }}
-        </ul>
-    </div>
-</div>
+<main class="browse-workspace notes-workspace">
+  <article class="browse-reader notes-reader">
+    <header class="browse-reader-header notes-reader-header">
+      <nav class="browse-breadcrumb notes-breadcrumb" aria-label="Breadcrumb">
+        {{ range .Ancestors.Reverse }}{{ if or (eq .RelPermalink "/notes/") (.IsDescendant (site.GetPage "/notes/")) }}<a href="{{ .RelPermalink }}">{{ .Title }}</a><span>/</span>{{ end }}{{ end }}
+      </nav>
+      <div class="browse-reader-title-row notes-reader-title-row">
+        <h1>{{ .Title }}</h1>
+        <span class="browse-badge notes-directory-badge">DIRECTORY</span>
+      </div>
+      {{ with .Description }}<p class="browse-reader-overview notes-reader-overview">{{ . }}</p>{{ end }}
+    </header>
+
+    {{ with .Content }}<div class="browse-reader-content notes-reader-content">{{ . }}</div>{{ end }}
+
+    <section class="browse-directory notes-directory" aria-labelledby="notes-directory-heading">
+      <div class="browse-directory-heading notes-directory-heading">
+        <h2 id="notes-directory-heading">Browse this directory</h2>
+        <span>{{ add (len .Sections) (len .RegularPages) }} items</span>
+      </div>
+      {{ if or .Sections .RegularPages }}
+      <div class="browse-directory-grid notes-directory-grid">
+        {{ range .Sections.ByTitle }}
+          <a class="browse-directory-card browse-directory-folder notes-directory-card notes-directory-folder" href="{{ .RelPermalink }}">
+            <span class="browse-directory-icon notes-directory-icon" aria-hidden="true">📁</span>
+            <span><strong>{{ .Title }}</strong><small>{{ add (len .Sections) (len .RegularPages) }} items</small></span>
+          </a>
+        {{ end }}
+        {{ range .RegularPages.ByTitle }}
+          <a class="browse-directory-card notes-directory-card" href="{{ .RelPermalink }}">
+            <span class="browse-directory-icon notes-directory-icon" aria-hidden="true">📄</span>
+            <span><strong>{{ .Title | default .File.BaseFileName }}</strong><small>Note</small></span>
+          </a>
+        {{ end }}
+      </div>
+      {{ else }}
+        <p class="notes-empty-directory">This directory does not contain any notes yet.</p>
+      {{ end }}
+    </section>
+  </article>
+</main>
 {{ end }}

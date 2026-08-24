@@ -1,0 +1,17 @@
+{{- $root := site.GetPage "/writeups/" -}}
+<aside class="browse-sidebar writeup-sidebar" aria-label="Writeup navigation" data-browse-sidebar data-browse-key="writeups">
+  <button class="browse-mobile-toggle" type="button" aria-controls="writeups-sidebar-panel" aria-expanded="false">
+    <span aria-hidden="true">☰</span> Browse writeups
+  </button>
+  <button class="browse-sidebar-collapse" type="button" aria-expanded="true" aria-label="Collapse navigation">
+    <span class="browse-collapse-label">Collapse</span><span class="browse-collapse-arrow" aria-hidden="true">‹</span>
+  </button>
+  <div class="browse-sidebar-panel" id="writeups-sidebar-panel">
+    <a class="browse-home-link" href="/">← Back to homepage</a>
+    <a class="browse-root-link{{ if eq .RelPermalink $root.RelPermalink }} is-active{{ end }}" href="{{ $root.RelPermalink }}">WRITEUPS</a>
+    <nav class="browse-tree" aria-label="All writeups">
+      {{ partial "writeups-tree.html" (dict "section" $root "current" .) }}
+    </nav>
+  </div>
+</aside>
+{{ partial "browse-workspace-script.html" . }}
