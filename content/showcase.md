@@ -1,6 +1,6 @@
 ---
 title: "Showcase"
-date: 2026-04-20
+date: 2026-08-23
 layout: "single"
 showFullContent: true
 readingTime: false
@@ -26,13 +26,12 @@ readingTime: false
 * **CompTIA A+**
 
 ### Current Objectives (Target 2026)
-* **OSCP** (Offensive Security Certified Professional) -- Planned for July 2026
-* **CISSP** (Certified Information Systems Security Professional) -- Planned for October 2026
-* **BSCSIA** (Bachelors of Science in Cybersecurity and Information Assurance @ WGU) -- Planned Graduation August 2026
+* **CISSP** (Certified Information Systems Security Professional) -- Planned for December 2026
+* **BSCSIA** (Bachelors of Science in Cybersecurity and Information Assurance @ WGU) -- Planned Graduation Febuary 2027
 
 ## Technical Proficiencies
-* **Languages:** C, C++, Assembly (x86/x64), Python, Rust.
-* **Operations:** Advanced Linux/Windows administration, incident response automation, and threat hunting.
+* **Languages:** C, C++, Assembly (x86/x64), Python.
+* **Operations:** Advanced Windows administration, incident response automation, and threat hunting.
 * **Infrastructure:** Architecting secure cloud environments via AWS.
 
 ---
