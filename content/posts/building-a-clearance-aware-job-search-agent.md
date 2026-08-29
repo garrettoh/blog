@@ -26,6 +26,10 @@ I wanted one place to answer a few practical questions:
 
 The hard part was the handoff. Search results, profile facts, job requirements, and resume bullets usually sit in separate places. I wanted each step to pass useful information to the next one.
 
+Here is the whole system in one view. The labels are intentionally generic, and the candidate data stores are redacted.
+
+![Job search agent architecture map](/images/job-search-agent/architecture-map.png)
+
 ## The subagents
 
 The project is split into small workers with clear responsibilities.
