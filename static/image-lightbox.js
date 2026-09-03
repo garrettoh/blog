@@ -6,16 +6,20 @@
   dialog.className = "image-lightbox";
   dialog.setAttribute("aria-label", "Expanded image preview");
 
+  const frame = document.createElement("div");
+  frame.className = "image-lightbox-frame";
+
   const closeButton = document.createElement("button");
   closeButton.className = "image-lightbox-close";
   closeButton.type = "button";
   closeButton.setAttribute("aria-label", "Close image preview");
-  closeButton.textContent = "×";
+  closeButton.textContent = "[ close × ]";
 
   const preview = document.createElement("img");
   const caption = document.createElement("p");
   caption.className = "image-lightbox-caption";
-  dialog.append(closeButton, preview, caption);
+  frame.append(closeButton, preview, caption);
+  dialog.append(frame);
   document.body.append(dialog);
 
   function close() {
