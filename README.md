@@ -71,11 +71,27 @@ layout: "notes"
 
 Regular note files should contain normal page front matter and should **not** set `layout: "notes"`. Folder pages use `layouts/section/notes.html`; individual notes use `layouts/notes/single.html`.
 
-When syncing from Obsidian:
+### Importing an Obsidian note
 
-1. Put images in `static/` and reference them from the site root, such as `/images/example.png`.
-2. Include a useful `title` in front matter.
-3. Set `draft: false`, or omit `draft`, when the note should be published.
+Use `scripts/import-obsidian-note.ps1` to bring an Obsidian Markdown file into the site. It can create Notes, Posts, or Writeups; copies local image attachments; and converts both `![[image.png]]` and normal local Markdown image links into Hugo-ready URLs.
+
+```powershell
+.\scripts\import-obsidian-note.ps1 -Source "C:\path\to\My Vault\Research\Example.md" -VaultRoot "C:\path\to\My Vault"
+```
+
+The command writes the note to `content/notes/Research/Example.md` and its images to `static/images/notes/Research/Example/`. Add `-Draft` to keep the new page unpublished. Run with `-WhatIf` first to preview the files it would create or copy.
+
+If no `-VaultRoot` is supplied, the note's own directory is treated as the vault root. Existing front matter is preserved; otherwise the importer adds a title based on the filename.
+
+For a writeup with vault-wide attachments, use a stable URL slug and point `-AttachmentRoot` at the attachment folder:
+
+```powershell
+.\scripts\import-obsidian-note.ps1 -Source "C:\path\to\Android CTF.md" -ContentType Writeup -Slug "android-ctf" -AttachmentRoot "C:\path\to\996 Images"
+```
+
+This creates `content/writeups/android-ctf/_index.md` and puts its images under `static/images/android-ctf/`. Use `-ContentType Posts` to create `content/posts/<slug>.md`. Run with `-WhatIf` first to preview the files it would create or copy.
+
+For a drag-and-drop window, run `scripts/open-obsidian-importer.ps1`. Drop a Markdown note into the first field, an optional central attachment folder (such as `996 Images`) into the second, choose the destination type, then import. The launcher opens a PowerShell window so you can see any missing-attachment warnings.
 
 ### Adding Writeups content
 
