@@ -2,6 +2,7 @@
 title: "Android CTF"
 layout: "Notes"
 icon: "note"
+status: "Complete"
 ---
 
 Initial Approach & Research
