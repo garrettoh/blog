@@ -58,17 +58,17 @@ I noticed earlier that we were loading that native library called fragment, I al
 - Offset in byte array that was created from the `R.string.app_logo` = 71612
 - Input to the native Fragment function = `15539863`
 
-![Pasted image 20260503133053](/images/android-ctf/Pasted-image-20260503133053.png)
+![Notifications Fragment's obfuscated class-loader setup in JADX](/images/android-ctf/notifications-fragment-obfuscated-loader.png)
 
 I looked for the string `app_logo` in JADX and it just gave me a hex value, I did some research and found that it would be in the strings.xml file upon finding it we find the file listed google.png. I kept note of the google.png that was located in the assets directory.
 
 
-![Pasted image 20260503122227](/images/android-ctf/Pasted-image-20260503122227.png)
+![The app_logo string resource pointing to google.png](/images/android-ctf/app-logo-string-resource.png)
 
 
 The reason that I found this file to be the culprit although there were other google.pngs is because upon looking at the section headers IEND ends at 117bo meaning there is more than likely our encrypted blob past that offset and that would match up with our binary value of `71612` to hex which is `117BC`
 
-![Pasted image 20260503132241](/images/android-ctf/Pasted-image-20260503132241.png)
+![The appended encrypted payload after the google.png IEND marker](/images/android-ctf/google-png-appended-encrypted-payload.png)
 
 Based off of this information I knew I needed to analyze what was going on in the native library for my next steps.
 
@@ -87,12 +87,12 @@ I researched for about 15 minutes found a lauriewired video on the JNI and setti
 I downloaded JNI_ALL and imported into ghidra now things made a little more sense. we setup jni_env* and j_input_str
 
 I found the Mask for what looked to be a rolling XOR operation
-![Pasted image 20260503124336](/images/android-ctf/Pasted-image-20260503124336.png)
+![The Fragment native function's rolling-XOR mask](/images/android-ctf/fragment-native-rolling-xor-mask.png)
 
 
 The algorithm we're looking to crack 
 
-![Pasted image 20260503124739](/images/android-ctf/Pasted-image-20260503124739.png)
+![Native Fragment key-generation routine in Ghidra](/images/android-ctf/fragment-native-key-generation-routine.png)
 We are essentially doing the following
 
 - Taking an initial string of chars as input from the function which in our case is `15539863`
@@ -150,12 +150,12 @@ I hopped onto cyberchef took our google.png found something that we could use as
 
 Boom we see the magic bytes `dex`!!! 
 
-![Pasted image 20260503125421](/images/android-ctf/Pasted-image-20260503125421.png)
+![CyberChef AES decryption revealing the embedded DEX payload](/images/android-ctf/cyberchef-aes-decrypted-dex.png)
 
 Now all we had to do was download it and open it up in JADX to see what's going on.
 
 Upon opening in JADX we see this 
-![Pasted image 20260503130917](/images/android-ctf/Pasted-image-20260503130917.png)
+![Decrypted Payload class revealing the Android CTF flag](/images/android-ctf/payload-class-flag.png)
 
 Our flag is `Android_CTF{Peel1ng_L4y3rs_0ne_by_0ne}`
 
@@ -170,4 +170,3 @@ I feel that I was able to utilize my knowledge in scripting, general CTF techniq
 Overall this challenge really gave me a good insight into android reversing and I had alot of fun :)
 
 Total time spent was around 2 - 3 hours with a majority of the time being used as research due to my unfamiliarity with the android specific architecture. 
-
