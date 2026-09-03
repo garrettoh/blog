@@ -109,6 +109,14 @@ eta: "Optional archive target"
 
 Nested sections automatically appear in both the sidebar and browse cards. Put downloadable artifacts below `static/downloads/writeups/` and link to them with `/downloads/writeups/...` URLs.
 
+Writeups with no nested sections automatically use a note icon (`📝`) in the sidebar; multi-page archives use a folder (`📁`). Override this per writeup when needed:
+
+```yaml
+icon: "note"   # Force a note icon
+# or
+icon: "folder" # Force a folder icon
+```
+
 ## Homepage social links
 
 The homepage currently displays GitHub and LinkedIn. Change their destinations in `hugo.toml`:

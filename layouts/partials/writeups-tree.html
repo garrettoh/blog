@@ -4,9 +4,11 @@
   {{- range $section.Sections.ByTitle }}
     {{- $isCurrent := eq .RelPermalink $current.RelPermalink -}}
     {{- $isAncestor := $current.IsDescendant . -}}
+    {{- $icon := lower (.Params.icon | default "") -}}
+    {{- $isSinglePage := not .Sections -}}
     <li class="browse-tree-folder{{ if or $isCurrent $isAncestor }} is-open{{ end }}">
       <a href="{{ .RelPermalink }}" class="browse-tree-folder-link{{ if $isCurrent }} is-active{{ end }}">
-        <span aria-hidden="true">📁</span>
+        <span aria-hidden="true">{{ if eq $icon "note" }}📝{{ else if eq $icon "folder" }}📁{{ else if $isSinglePage }}📝{{ else }}📁{{ end }}</span>
         <span class="browse-tree-label">{{ .Title }}</span>
         {{ with .Params.status }}<small>{{ . }}</small>{{ end }}
       </a>
