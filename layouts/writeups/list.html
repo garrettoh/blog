@@ -26,8 +26,10 @@
       </div>
       <div class="browse-directory-grid">
         {{ range .Sections.ByTitle }}
+        {{ $icon := lower (.Params.icon | default "") }}
+        {{ $isSinglePage := not .Sections }}
         <a class="browse-directory-card browse-directory-folder" href="{{ .RelPermalink }}">
-          <span class="browse-directory-icon" aria-hidden="true">📁</span>
+          <span class="browse-directory-icon" aria-hidden="true">{{ if eq $icon "note" }}📝{{ else if eq $icon "folder" }}📁{{ else if $isSinglePage }}📝{{ else }}📁{{ end }}</span>
           <span><strong>{{ .Title }}</strong><small>{{ .Params.status | default (printf "%d items" (len .Sections)) }}</small></span>
         </a>
         {{ end }}
