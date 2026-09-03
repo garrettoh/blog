@@ -1,10 +1,10 @@
-# 🛡️ XSS (Cross-Site Scripting)
+# XSS (Cross-Site Scripting)
 
-### 📌 What it is
+### Basics
 XSS is an injection vulnerability where an attacker "tricks" a website into executing malicious JavaScript in a victim's browser. The browser thinks the script came from the trusted website, so it allows the script to access cookies, session tokens, or perform actions as that user.
 
-### 🚩 The "Dead Giveaway" (How to find it)
-The "Holy Grail" of XSS identification is **Reflection**. 
+### What to look for
+Start by checking for **reflection**.
 If you type a unique string (like `XSS_TEST_123`) into a search bar, a URL parameter, or a profile field, and that **exact string appears in the page's HTML source**, the site is likely vulnerable.
 
 **The Test:**
@@ -14,7 +14,7 @@ If you type a unique string (like `XSS_TEST_123`) into a search bar, a URL param
 
 ---
 
-### ⚡ The 3 Types (Quick Ref)
+### Common categories
 
 1. **Reflected (Non-Persistent):**
    - **Where:** URL parameters (`?search=test`).
@@ -33,7 +33,7 @@ If you type a unique string (like `XSS_TEST_123`) into a search bar, a URL param
 
 ---
 
-### 🎣 The "Cookie Grabber" (OSCP Listener Setup)
+### Stored XSS validation
 Once you find Stored XSS, use this to steal the Admin's session.
 
 1. **Start your listener (on your Kali box):**
@@ -44,3 +44,7 @@ Once you find Stored XSS, use this to steal the Admin's session.
 
 3. **Check your Python logs:**
    You will see a GET request. Take the `c=` value, base64 decode it, and you have the Admin's session cookie.
+
+### Further reading
+
+- [HackTricks: XSS](https://book.hacktricks.wiki/en/pentesting-web/xss-cross-site-scripting/index.html)

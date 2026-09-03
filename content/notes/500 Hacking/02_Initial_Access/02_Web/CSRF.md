@@ -1,12 +1,12 @@
-# 🕵️ CSRF (Cross-Site Request Forgery)
+# CSRF (Cross-Site Request Forgery)
 
-### 📌 What it is
+### Basics
 
 CSRF tricks a **victim's browser** into performing an unwanted action on a different website where they are currently authenticated. Unlike XSS (which steals data), CSRF **executes actions** (e.g., changing a password, deleting an account).
 
-### 🚩 The "Dead Giveaway" (How to find it)
+### What to look for
 
-The "Holy Grail" of CSRF is a **Sensitive Action** (POST request) that **lacks a unique Token** (CSRF Token).
+A useful CSRF target is a **sensitive action** (usually a POST request) that does not require a unique CSRF token.
 
 **The Test:**
 
@@ -16,7 +16,7 @@ The "Holy Grail" of CSRF is a **Sensitive Action** (POST request) that **lacks a
 
 ---
 
-### ⚡ The Difference (Quick Ref)
+### How it differs from related issues
 
 - **XSS:** Steals the cookie.
 - **CSRF:** Uses the cookie (without seeing it) to perform an action.
@@ -24,12 +24,16 @@ The "Holy Grail" of CSRF is a **Sensitive Action** (POST request) that **lacks a
 
 ---
 
-### 🔗 Payloads & Resources (All The Things)
+### References
 
 - **[Burp Suite - CSRF PoC Generator](https://portswigger.net/burp/documentation/desktop/tools/engagement-tools/generate-csrf-poc):** (Pro feature, but can be done manually) Generates the HTML to trigger the attack.
 
 ---
 
-### ⚠️ The "Rabbit Hole" Warning
+### Scope note
 
-In **OSCP**, if you find CSRF, it is usually part of a chain. You likely need to use it to change an Admin's password so _you_ can log in and find a File Upload vulnerability. Don't stop at the "Success" message—log in and finish the job!
+In **OSCP**, CSRF is usually part of a chain. It may enable an administrative change that exposes another weakness, such as a file upload. Validate the impact after the request succeeds.
+
+### Further reading
+
+- [HackTricks: CSRF](https://book.hacktricks.wiki/en/pentesting-web/csrf-cross-site-request-forgery.html)

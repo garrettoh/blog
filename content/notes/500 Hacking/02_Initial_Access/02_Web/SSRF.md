@@ -1,12 +1,12 @@
-# 📡 SSRF (Server-Side Request Forgery)
+# SSRF (Server-Side Request Forgery)
 
-### 📌 What it is
+### Basics
 
 SSRF allows an attacker to induce the **server-side application** to make requests to an arbitrary domain. Essentially, you are using the vulnerable server as a "proxy" to attack internal systems that you cannot reach directly from the internet.
 
-### 🚩 The "Dead Giveaway" (How to find it)
+### What to look for
 
-The "Holy Grail" of SSRF is a **URL within a Parameter**.
+A common SSRF entry point is a **user-controlled URL parameter**.
 
 **The Test:**
 
@@ -16,7 +16,7 @@ The "Holy Grail" of SSRF is a **URL within a Parameter**.
 
 ---
 
-### 🎣 The "Exploitation Path" (OSCP/WGU Strategy)
+### Testing workflow
 
 - [ ] **Step 1: Internal Port Scanning**
     - Use the server to scan itself: `url=http://127.0.0.1:22`, `url=http://127.0.0.1:3306`.
@@ -25,3 +25,7 @@ The "Holy Grail" of SSRF is a **URL within a Parameter**.
     - **Azure:** `http://169.254.169.254/metadata/instance?api-version=2021-02-01`
 - [ ] **Step 3: Access Local Files**
     - Try the `file://` protocol: `url=file:///etc/passwd`.
+
+### Further reading
+
+- [HackTricks: SSRF](https://book.hacktricks.wiki/en/pentesting-web/ssrf-server-side-request-forgery/index.html)

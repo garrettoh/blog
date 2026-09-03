@@ -1,10 +1,10 @@
-# 💉 SQL Injection (SQLi)
+# SQL Injection (SQLi)
 
-### 📌 What it is
+### Basics
 
 SQL Injection is a vulnerability where an application improperly handles user input, allowing an attacker to "inject" their own SQL commands into a database query. This can lead to unauthorized data access, data modification, or even full system compromise (RCE).
 
-### 🚩 The "Dead Giveaway" (How to find it)
+### What to look for
 
 The classic sign of SQLi is a **Database Error** or a **Change in Page Content** when you input a single quote (`'`).
 
@@ -16,7 +16,7 @@ The classic sign of SQLi is a **Database Error** or a **Change in Page Content**
 
 ---
 
-### ⚡ The 3 Types (Quick Ref)
+### Common categories
 
 1. **In-Band (Union-Based):
     - **How:** Uses the `UNION` operator to combine your results with the original query.
@@ -30,7 +30,7 @@ The classic sign of SQLi is a **Database Error** or a **Change in Page Content**
 
 ---
 
-### 🎣 The "Exploitation Path" (OSCP/WGU Strategy)
+### Testing workflow
 
 - [ ] **Step 1: Order By (Find Column Count)**
     - `1' ORDER BY 1--`, `1' ORDER BY 2--` ... until it breaks.
@@ -43,16 +43,16 @@ The classic sign of SQLi is a **Database Error** or a **Change in Page Content**
 
 ---
 
-### 🔗 Payloads & Resources (All The Things)
+### References
 
 When you're stuck, use these master lists:
 
 - **[PayloadsAllTheThings - SQL Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/SQL%20Injection):** The industry standard for manual payloads (MySQL, MSSQL, PostgreSQL, Oracle).
 - **[Pentestmonkey - SQLi Cheat Sheets](http://pentestmonkey.net/category/cheat-sheet/sql-injection):** Excellent for specific database syntax differences.
-- **[HackTricks - SQL Injection]:** Great for advanced bypasses (WAF, filter evasion).
+- **[HackTricks - SQL Injection](https://book.hacktricks.wiki/en/pentesting-web/sql-injection/index.html):** Advanced reference for filter behavior and database-specific techniques.
 
 ---
 
-### ⚠️ The "Rabbit Hole" Warning
+### Scope note
 
 If you are on an OSCP machine and `sqlmap` is forbidden (or you've used your one-time allowance), don't spend 4 hours on a **Time-Based Blind SQLi** manually. If it’s not Union-based or a simple Auth Bypass (`' OR 1=1--`), check if there is a different service (like SMB or FTP) that provides a easier path.

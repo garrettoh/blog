@@ -52,7 +52,7 @@ This script called out over non-standard port 8404 to fetch a secondary installe
 
 Once the initial access broker established entry, their primary objective was to install redundant persistence before selling the victim system on the dark web. 
 
-To ensure they retained control regardless of what the buyer did—or if the initial entry vector was remediated—the broker deployed a local Tor proxy beacon (`a.exe` / `mqsvc.exe`) configured to reach out to an onion service C2:
+To retain control even if the buyer remediated the initial entry vector, the broker deployed a local Tor proxy beacon (`a.exe` / `mqsvc.exe`) configured to reach an onion-service C2:
 
 AGENT_RELAY_HOST: gy4mou62xing74czn6xwirpv3kxg23rjmzyd4jsy42eujnqca64fdgqd.onion  
 AGENT_RELAY_PORT: 7980  

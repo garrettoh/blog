@@ -1,4 +1,4 @@
-## 📡 SNMP Enumeration (161 UDP)
+## SNMP Enumeration (161 UDP)
 - [ ] **Community String Guessing**
 	- [ ] `onesixtyone -c /usr/share/seclists/Discovery/SNMP/common-snmp-community-strings.txt <IP>`
 - [ ] **Full Walk (Look for Users/Processes)**
@@ -6,6 +6,10 @@
 - [ ] **Check for Software Versions**
 	- [ ] `snmp-check <IP>`
 
-**🔥 Common Exploits:**
+**Follow-up checks:**
 - Extracting cleartext passwords from running process parameters.
 - Finding internal network info or hostnames for further pivoting.
+
+### References
+
+- [HackTricks: SNMP](https://book.hacktricks.wiki/en/network-services-pentesting/pentesting-snmp/index.html)

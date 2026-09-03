@@ -1,12 +1,12 @@
-# 🏗️ SSTI (Server-Side Template Injection)
+# SSTI (Server-Side Template Injection)
 
-### 📌 What it is
+### Basics
 
 SSTI occurs when an application embeds user input directly into a **Template Engine** (like Jinja2, Twig, or Mako) instead of passing it as data. Template engines are designed to execute code to generate dynamic HTML; if you can inject into them, you aren't just changing text—you are running code on the server.
 
-### 🚩 The "Dead Giveaway" (How to find it)
+### What to look for
 
-The "Holy Grail" of SSTI is **Mathematical Reflection**. You send a math problem in the template's syntax, and the server returns the **answer**.
+A simple SSTI test is **mathematical evaluation**: send an expression in the template syntax and check whether the server renders its result.
 
 **The Test:**
 
@@ -19,7 +19,7 @@ The "Holy Grail" of SSTI is **Mathematical Reflection**. You send a math problem
 
 ---
 
-### ⚡ The 3 Most Common Engines (Quick Ref)
+### Common template engines
 
 1. **Jinja2 (Python/Flask/Django):**
     - **Syntax:** `{{ ... }}`
@@ -33,7 +33,7 @@ The "Holy Grail" of SSTI is **Mathematical Reflection**. You send a math problem
 
 ---
 
-### 🎣 The "Exploitation Path" (OSCP/WGU Strategy)
+### Testing workflow
 
 - [ ] **Step 1: Identify the Engine**
     - Use the [SSTI Decision Tree](https://www.google.com/search?q=https://portswigger.net/web-security/images/template-injection-decision-tree.png) to confirm if it's Jinja, Twig, or Smarty.
@@ -45,14 +45,14 @@ The "Holy Grail" of SSTI is **Mathematical Reflection**. You send a math problem
 
 ---
 
-### 🔗 Payloads & Resources (All The Things)
+### References
 
 - **[PayloadsAllTheThings - SSTI](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Server%20Side%20Template%20Injection):** The most comprehensive list of payloads for every engine (Python, PHP, Java, Ruby).
-- **[HackTricks - SSTI](https://www.google.com/search?q=https://book.hacktricks.xyz/pentesting-web/ssti-server-side-template-injection):** Excellent breakdown of how to "climb" the Python object tree to reach RCE.
+- **[HackTricks - SSTI](https://book.hacktricks.wiki/en/pentesting-web/ssti-server-side-template-injection/index.html):** Reference material for identifying template engines and their behavior.
 - **[Tplmap](https://github.com/epinna/tplmap):** The "SQLmap" of SSTI. **Warning:** Use cautiously in OSCP (check current exam rules on automated exploitation tools).
 
 ---
 
-### ⚠️ The "Rabbit Hole" Warning
+### Scope note
 
 If you see `{{ ... }}` and your math doesn't work, check for **Client-Side Template Injection (CSTI)**. If the site uses **AngularJS** or **Vue.js**, the "math" might only work in your browser, not on the server. In that case, treat it like **XSS**, not RCE.

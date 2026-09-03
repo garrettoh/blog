@@ -3,3 +3,6 @@ resources/
 .hugo_build.lock
 .agent/
 tmp/
+/scripts/import-obsidian-note.ps1
+/scripts/open-obsidian-importer.ps1
+/scripts/Open-Obsidian-Importer.cmd

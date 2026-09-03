@@ -15,7 +15,7 @@ Comparing the first bytes in CFF Explorer revealed the problem: the file began w
 
 ## Repairing the executable
 
-I changed the first byte from `15` to `4D` in CFF Explorer, restoring the `MZ` header. The repaired executable was now recognizable, but running it under its challenge filename caused more numbered copies—such as 151 through 154—to appear. Renaming copies to lower numbers only continued that behavior, and the 150 copy returned to the corrupted header.
+I changed the first byte from `15` to `4D` in CFF Explorer, restoring the `MZ` header. The repaired executable was now recognizable, but running it under its challenge filename caused more numbered copies, such as 151 through 154, to appear. Renaming copies to lower numbers only continued that behavior, and the 150 copy returned to the corrupted header.
 
 This showed that repairing the header was only the first condition. The program also cared about the name it was launched under.
 
@@ -27,7 +27,7 @@ The version metadata contained the original filename:
 UnholyDragon_win32.exe
 ```
 
-I renamed the header-repaired `UnholyDragon-150.exe` to that exact value and ran it in the isolated analysis VM. With both conditions satisfied—the valid `MZ` signature and expected filename—the program displayed the flag.
+I renamed the header-repaired `UnholyDragon-150.exe` to that exact value and ran it in the isolated analysis VM. With a valid `MZ` signature and the expected filename, the program displayed the flag.
 
 ![The repaired executable displays the UnholyDragon flag.](/images/flareon-12/04-unholydragon/flag.png)
 

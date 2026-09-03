@@ -2,7 +2,7 @@
 title: "Task 02 - Malicious Router"
 layout: "Notes"
 overview: "Concise solution notes: PCAP triage identified Router3 redirecting Ubuntu archive traffic to a malicious DNS destination."
-status: "Complete — concise notes"
+status: "Complete: concise notes"
 icon: "note"
 ---
 
@@ -77,9 +77,9 @@ config route
 
 ## Key addresses
 
-- `192.168.5.2` — route to OpenWrt2
-- `192.168.3.254` — LAN address
-- `127.8.1.3` — loopback address
+- `192.168.5.2`: route to OpenWrt2
+- `192.168.3.254`: LAN address
+- `127.8.1.3`: loopback address
 
 ## Result
 
